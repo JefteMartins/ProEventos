@@ -10,7 +10,12 @@ import { Component,OnInit } from '@angular/core';
 export class EventosComponent implements  OnInit {
 
   public eventos: any = [];
+  showImage: boolean = false;
+  filtroLista: string = '';
 
+  public hideImage(): void {
+    this.showImage = !this.showImage;
+  }
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {

@@ -1,22 +1,33 @@
 <h2>Eventos do Component</h2>
 <hr />
-<form class="row g-3 align-tems-center p-2" action="">
+<div class="row g-3 align-tems-center p-2" >
   <div class="col-auto">
     <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="buscar" />
+      <input
+      type="text"
+      class="form-control"
+      placeholder="buscar"
+      [(ngModel)]="filtroLista"
+      />
     </div>
   </div>
   <div class="col-auto">
     <button type="submit" class="btn btn-outline-success">Buscar</button>
   </div>
-</form>
-
+</div>
+<h3>filtro: {{filtroLista}}</h3>
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
+      <th>
+        <button type="button" class="btn btn-outline-light btn-sm"
+        (click)="hideImage()"
+        >
+          {{ showImage ? 'Ocultar' : 'Mostrar' }}
+        </button>
+      </th>
       <th>#1</th>
-      <th>Image</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
@@ -26,13 +37,19 @@
   </thead>
   <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let e of eventos">
+      <td>
+        <img [collapse]="!showImage"
+        [isAnimated]="true"
+        src="/assets/{{ e.imagemURL }}"
+        style="width: 50px; margin: 5px;"
+        alt="">
+      </td>
       <td>{{ e.eventoId }}</td>
-      <td>{{ e.imagemURL }}</td>
+      <td>{{ e.tema }}</td>
       <td>{{ e.local }}</td>
       <td>{{ e.dataEvento }}</td>
       <td>{{ e.qtdPessoas }}</td>
       <td>{{ e.lote }}</td>
-      <td>{{ e.imagemURL }}</td>
     </tr>
   </tbody>
   <tfoot *ngIf="!eventos.length">
