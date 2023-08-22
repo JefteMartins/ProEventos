@@ -2,8 +2,10 @@
 <hr />
 <div class="row g-3 align-tems-center p-2" >
   <div class="col-auto">
-    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
+    <label class="visually-hidden"></label>
     <div class="input-group">
+      <!-- add an labe with "Filtros:" in content and wirth margin right using bootstrap -->
+      <label class="input-group-text">Filtros:</label>
       <input
       type="text"
       class="form-control"
@@ -13,10 +15,8 @@
     </div>
   </div>
   <div class="col-auto">
-    <button type="submit" class="btn btn-outline-success">Buscar</button>
   </div>
 </div>
-<h3>filtro: {{filtroLista}}</h3>
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
@@ -33,10 +33,11 @@
       <th>Data</th>
       <th>Qtd Pessoas</th>
       <th>Lote</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let e of eventos">
+    <tr *ngFor="let e of eventosFiltrados">
       <td>
         <img [collapse]="!showImage"
         [isAnimated]="true"
@@ -50,6 +51,10 @@
       <td>{{ e.dataEvento }}</td>
       <td>{{ e.qtdPessoas }}</td>
       <td>{{ e.lote }}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm me-2">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="!eventos.length">
