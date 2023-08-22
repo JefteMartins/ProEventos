@@ -3,5 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ProEventos.Persistence\Proeventos.Persistence.csproj" />
+    <ProjectReference Include="..\ProEventos.Persistence\Proeventos.Persistence.csproj" />
+  </ItemGroup>
 
 </Project>
