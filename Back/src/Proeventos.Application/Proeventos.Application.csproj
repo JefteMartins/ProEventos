@@ -8,5 +8,9 @@
     <ProjectReference Include="..\ProEventos.Persistence\Proeventos.Persistence.csproj" />
     <ProjectReference Include="..\ProEventos.Persistence\Proeventos.Persistence.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+  </ItemGroup>
 
 </Project>
