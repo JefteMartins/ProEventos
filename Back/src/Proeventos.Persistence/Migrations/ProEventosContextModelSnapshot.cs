@@ -97,6 +97,9 @@ namespace Proeventos.Persistence.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Telefone")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Palestrantes");
@@ -164,7 +167,7 @@ namespace Proeventos.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Proeventos.Domain.Palestrante", "Palestrante")
-                        .WithMany()
+                        .WithMany("PalestrantesEventos")
                         .HasForeignKey("PalestranteID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -200,6 +203,8 @@ namespace Proeventos.Persistence.Migrations
 
             modelBuilder.Entity("Proeventos.Domain.Palestrante", b =>
                 {
+                    b.Navigation("PalestrantesEventos");
+
                     b.Navigation("RedesSociais");
                 });
 #pragma warning restore 612, 618

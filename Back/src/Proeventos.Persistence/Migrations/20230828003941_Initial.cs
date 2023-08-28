@@ -35,6 +35,7 @@ namespace Proeventos.Persistence.Migrations
                     Nome = table.Column<string>(type: "TEXT", nullable: true),
                     MiniCurriculo = table.Column<string>(type: "TEXT", nullable: true),
                     ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
+                    Telefone = table.Column<string>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

@@ -9,7 +9,7 @@ using ProEventos.Persistence;
 namespace Proeventos.Persistence.Migrations
 {
     [DbContext(typeof(ProEventosContext))]
-    [Migration("20230823221155_Initial")]
+    [Migration("20230828003941_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,9 @@ namespace Proeventos.Persistence.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Telefone")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("Palestrantes");
@@ -166,7 +169,7 @@ namespace Proeventos.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Proeventos.Domain.Palestrante", "Palestrante")
-                        .WithMany()
+                        .WithMany("PalestrantesEventos")
                         .HasForeignKey("PalestranteID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -202,6 +205,8 @@ namespace Proeventos.Persistence.Migrations
 
             modelBuilder.Entity("Proeventos.Domain.Palestrante", b =>
                 {
+                    b.Navigation("PalestrantesEventos");
+
                     b.Navigation("RedesSociais");
                 });
 #pragma warning restore 612, 618
