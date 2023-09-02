@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Proeventos.Application.Contratos;
-using Proeventos.Persistence.Contratos;
+using ProEventos.Application.Contratos;
 using ProEventos.Domain;
+using ProEventos.Persistence.Contratos;
 
-namespace Proeventos.Application
+namespace ProEventos.Application
 {
     public class EventoService : IEventoService
     {
@@ -16,7 +14,6 @@ namespace Proeventos.Application
         {
             _eventoPersist = eventoPersist;
             _geralPersist = geralPersist;
-
         }
         public async Task<Evento> AddEventos(Evento model)
         {
@@ -31,10 +28,10 @@ namespace Proeventos.Application
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<Evento> UpdateEvento(int eventoId, Evento model)
         {
             try
@@ -53,23 +50,22 @@ namespace Proeventos.Application
             }
             catch (Exception ex)
             {
-                
                 throw new Exception(ex.Message);
             }
         }
+
         public async Task<bool> DeleteEvento(int eventoId)
         {
             try
             {
                 var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, false);
-                if (evento == null) throw new Exception("Evento para delete não foi encontrado");
+                if (evento == null) throw new Exception("Evento para delete não encontrado.");
 
                 _geralPersist.Delete<Evento>(evento);
                 return await _geralPersist.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                
                 throw new Exception(ex.Message);
             }
         }
@@ -85,7 +81,6 @@ namespace Proeventos.Application
             }
             catch (Exception ex)
             {
-                
                 throw new Exception(ex.Message);
             }
         }
@@ -101,7 +96,6 @@ namespace Proeventos.Application
             }
             catch (Exception ex)
             {
-                
                 throw new Exception(ex.Message);
             }
         }
@@ -117,7 +111,6 @@ namespace Proeventos.Application
             }
             catch (Exception ex)
             {
-                
                 throw new Exception(ex.Message);
             }
         }

@@ -5,12 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Proeventos.Application;
-using Proeventos.Application.Contratos;
-using Proeventos.Persistence;
-using Proeventos.Persistence.Contratos;
-using ProEventos.Domain;
+using ProEventos.Application;
+using ProEventos.Application.Contratos;
+using ProEventos.Persistence;
 using ProEventos.Persistence.Contextos;
+using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.API
 {
@@ -27,11 +26,12 @@ namespace ProEventos.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProEventosContext>(
-                context => context.UseSqlite(
-                    Configuration.GetConnectionString("Default")
-                )
+                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = 
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
 
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
@@ -60,11 +60,9 @@ namespace ProEventos.API
 
             app.UseAuthorization();
 
-            app.UseCors(
-                x => 
-                x.AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowAnyOrigin());
 
             app.UseEndpoints(endpoints =>
             {
