@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
+import { EventoService } from '../services/evento.service';
+import { Evento } from '../models/Evento';
 
 @Component({
   selector: 'app-eventos',
@@ -9,8 +10,8 @@ import { Component,OnInit } from '@angular/core';
 
 export class EventosComponent implements  OnInit {
 
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
   showImage: boolean = false;
 
   private _filtroLista: string = '';
@@ -22,10 +23,10 @@ export class EventosComponent implements  OnInit {
   public set filtroLista(value: string){
     this._filtroLista = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(this.filtroLista) : this.eventos;
-    console.log(this.eventosFiltrados);
+    console.log('filtrados =>', this.eventosFiltrados);
   }
 
-  filtrarEventos(filtrarPor: string): any {
+  filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
       (evento: { tema: string; local: string; }) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
@@ -36,22 +37,22 @@ export class EventosComponent implements  OnInit {
   public hideImage(): void {
     this.showImage = !this.showImage;
   }
-  constructor(private http: HttpClient) { }
+  constructor(private eventoService: EventoService) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEventos();
   }
 
   public getEventos(): void {
-    this.http.get("https://localhost:5001/api/eventos").subscribe(
+    this.eventoService.getEventos().subscribe(
      {
-      next: (response: any) => {
-        this.eventos = response;
+      next: (_eventos: Evento[]) => {
+        this.eventos = _eventos;
         this.eventosFiltrados = this.eventos;
       },
-      error: (error: any) => {
-        console.log(error);
-      }
+      error: (error: any) => console.log(error),
+      complete: () => console.log('complete')
+
      }
     );
   }

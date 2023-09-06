@@ -12,6 +12,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { NavComponent } from './nav/nav.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { EventoService } from './services/evento.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     CollapseModule.forRoot(),
     AccordionModule.forRoot()
   ],
-  providers: [],
+  providers: [EventoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

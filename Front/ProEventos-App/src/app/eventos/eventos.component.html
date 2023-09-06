@@ -45,12 +45,16 @@
         style="width: 50px; margin: 5px;"
         alt="">
       </td>
-      <td>{{ e.eventoId }}</td>
+      <td>{{ e.id }}</td>
       <td>{{ e.tema }}</td>
       <td>{{ e.local }}</td>
       <td>{{ e.dataEvento }}</td>
       <td>{{ e.qtdPessoas }}</td>
-      <td>{{ e.lote }}</td>
+      <!-- ngFor in e.lotes -->
+      <td>
+        <ul>
+          <li *ngFor="let l of e.lotes">{{ l.nome }}</li>
+        </ul>
       <td>
         <button type="button" class="btn btn-primary btn-sm me-2">Editar</button>
         <button type="button" class="btn btn-danger btn-sm">Excluir</button>
