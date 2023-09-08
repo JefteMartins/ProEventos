@@ -24,6 +24,7 @@
         <button type="button" class="btn btn-outline-light btn-sm"
         (click)="hideImage()"
         >
+        <i class="{{!showImage ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
           {{ showImage ? 'Ocultar' : 'Mostrar' }}
         </button>
       </th>
@@ -46,18 +47,19 @@
         alt="">
       </td>
       <td>{{ e.id }}</td>
-      <td>{{ e.tema }}</td>
+      <td>{{ e.tema | uppercase }}</td>
       <td>{{ e.local }}</td>
-      <td>{{ e.dataEvento }}</td>
+      <td>{{ e.dataEvento | DateTimeFormat}}</td>
       <td>{{ e.qtdPessoas }}</td>
+      <td>{{ e.lotes[0].nome }}</td>
       <!-- ngFor in e.lotes -->
       <td>
-        <ul>
-          <li *ngFor="let l of e.lotes">{{ l.nome }}</li>
-        </ul>
-      <td>
-        <button type="button" class="btn btn-primary btn-sm me-2">Editar</button>
-        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        <button type="button" class="btn btn-primary btn-sm me-2">
+          <i class="{{'fa fa-edit'}}"></i>
+          Editar</button>
+        <button type="button" class="btn btn-danger btn-sm">
+          <i class="{{'fa fa-trash'}}"></i>
+          Excluir</button>
       </td>
     </tr>
   </tbody>
