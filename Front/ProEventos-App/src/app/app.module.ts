@@ -10,9 +10,14 @@ import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { NavComponent } from './nav/nav.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import { EventoService } from './services/evento.service';
+
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 @NgModule({
   declarations: [
@@ -29,7 +34,10 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
     BrowserAnimationsModule,
     FormsModule,
     CollapseModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [EventoService],
   bootstrap: [AppComponent]
