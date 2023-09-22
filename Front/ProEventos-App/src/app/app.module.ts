@@ -25,6 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
 import { EventoService } from './services/evento.service';
+import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
+import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { EventoService } from './services/evento.service';
     TituloComponent,
     ContatosComponent,
     DashboardComponent,
-    PerfilComponent
+    PerfilComponent,
+    EventoListaComponent,
+    EventoDetalheComponent
    ],
   imports: [
     BrowserModule,
