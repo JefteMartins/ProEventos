@@ -8,7 +8,7 @@ import { PalestrantesComponent } from './components/palestrantes/palestrantes.co
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { EventosComponent } from './components/eventos/eventos.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilComponent } from './components/user/perfil/perfil.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,32 +27,38 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { EventoService } from './services/evento.service';
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
+import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventosComponent,
-    PalestrantesComponent,
     NavComponent,
-    DateTimeFormatPipe,
+    UserComponent,
+    LoginComponent,
     TituloComponent,
+    PerfilComponent,
+    EventosComponent,
     ContatosComponent,
     DashboardComponent,
-    PerfilComponent,
+    DateTimeFormatPipe,
     EventoListaComponent,
-    EventoDetalheComponent
+    PalestrantesComponent,
+    RegistrationComponent,
+    EventoDetalheComponent,
    ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule,
+    ModalModule.forRoot(),
+    TooltipModule.forRoot(),
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
-    TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot(),
     ToastrModule.forRoot(
       {
         timeOut: 5000,

@@ -1,0 +1,93 @@
+<div class="row mt-4">
+  <div class="col-md-6 d-none d-md-block" style="height: 450px">
+    <div class="text-center col-md-12 my-auto side-heder">
+      <h1>Cadastro de Usuário</h1>
+      <img
+        src="../../../../assets/registerImage.png"
+        class="my-4"
+        alt=""
+        width="400px"
+      />
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <form class="p-3">
+      <div class="pb-3 d-block d-md-none">
+        <h3 class="border-bottom">Cadastro de Usuário</h3>
+      </div>
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Primeiro Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          placeholder="Insira o Primeiro nome"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Último Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          placeholder="Insira o Último nome"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="email"
+          placeholder="Insira o Email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Usuário:</label>
+        <input
+          class="form-control"
+          type="text"
+          id="username"
+          placeholder="Insira o nome de Usuário"
+        />
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="password" class="form-label">Senha:</label>
+          <input
+            class="form-control"
+            type="password"
+            id="password"
+            placeholder="Digite uma Senha"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="confirmPassword" class="form-label"
+            >Confirmar Senha:</label
+          >
+          <input
+            class="form-control"
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirme a Senha"
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="customCheck1" />
+          <label class="form-check-label" for="customCheck1"
+            >Eu concordo com os <a href="#">Termos de Uso</a>.</label
+          >
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success btn-lg btn-block">Registrar</button>
+      </div>
+      <div class="mb-3">
+        <a routerLink="/user/login" class="btn btn-link btn-block">Já sou Cadastrado</a>
+      </div>
+    </form>
+  </div>
+</div>
