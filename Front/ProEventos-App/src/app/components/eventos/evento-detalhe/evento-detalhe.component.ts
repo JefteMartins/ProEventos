@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -7,13 +7,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./evento-detalhe.component.scss'],
 })
 export class EventoDetalheComponent implements OnInit {
+
+  limiteDePessoas = 5000;
+
   form!: FormGroup;
+
   get f() : any {
     return this.form.controls;
   }
 
+
   constructor(
-    private fb: FormBuilder,
+private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {
@@ -30,5 +35,9 @@ export class EventoDetalheComponent implements OnInit {
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     });
+  }
+
+  public resetForm(): void {
+    this.form.reset();
   }
 }
