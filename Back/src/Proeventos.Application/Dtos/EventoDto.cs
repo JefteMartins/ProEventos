@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ProEventos.Application.Dtos
 {
@@ -15,8 +13,8 @@ namespace ProEventos.Application.Dtos
         public string ImagemURL { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        // public IEnumerable<Lote> Lotes { get; set; }
-        // public IEnumerable<RedeSocial> RedesSociais { get; set; }
-        // public IEnumerable<PalestranteEvento> PalestrantesEventos { get; set; }
+        public IEnumerable<LoteDto> Lotes { get; set; }
+        public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
+        public IEnumerable<PalestranteDto> Palestrante { get; set; }
     }
 }
