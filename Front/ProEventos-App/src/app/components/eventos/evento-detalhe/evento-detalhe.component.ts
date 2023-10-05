@@ -5,7 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Evento } from '@app/models/Evento';
+import { EventoService } from '@app/services/evento.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -14,7 +19,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 })
 export class EventoDetalheComponent implements OnInit {
   limiteDePessoas = 5000;
-
+  evento = {} as Evento;
   form!: FormGroup;
 
   get f(): any {
@@ -23,9 +28,38 @@ export class EventoDetalheComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private localeService: BsLocaleService
+    private localeService: BsLocaleService,
+    private router: ActivatedRoute,
+    private eventoService: EventoService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+
   ) {
     this.localeService.use('pt-br');
+  }
+  public carregarEvento(): void {
+    const eventoIdParam = this.router.snapshot.paramMap.get('id');
+    if (eventoIdParam !== null) {
+      this.spinner.show();
+
+      this.eventoService.getEventosById(+eventoIdParam).subscribe(
+        {
+          next:(evento: Evento) => {
+            this.evento = { ...evento };
+            this.form.patchValue(this.evento);
+            this.spinner.hide();
+          },
+          error: (error: any) => {
+            this.spinner.hide();
+            this.toastr.error('Erro ao tentar carregar evento.', 'Erro!');
+            console.error(error);
+          },
+          complete: () => {
+            this.spinner.hide();
+          }
+        }
+      )
+    }
   }
 
   get bsConfig(): any {
@@ -38,6 +72,7 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.carregarEvento();
     this.validation();
   }
 

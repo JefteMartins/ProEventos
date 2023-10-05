@@ -15,7 +15,8 @@ export class EventoListaComponent {
   modalRef?: BsModalRef;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
-  showImage: boolean = false;
+  public showImage: boolean = false;
+  public eventoId: number = 0;
 
   private _filtroLista: string = '';
 
@@ -69,7 +70,9 @@ export class EventoListaComponent {
      }
     );
   }
-  openModal(template: TemplateRef<any>): void {
+  openModal(event:any , template: TemplateRef<any>, eventoId: number): void {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
