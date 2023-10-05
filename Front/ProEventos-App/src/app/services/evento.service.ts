@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Evento } from '../models/Evento';
 
 @Injectable(
-  // { Já adicionado no app.module.ts
+  // { Já adicionado no app.module.ts => providers: [EventoService],
   //   providedIn: 'root',
   // }
 )

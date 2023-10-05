@@ -56,8 +56,7 @@
         <td>{{ e.local }}</td>
         <td>{{ e.dataEvento | DateTimeFormat }}</td>
         <td>{{ e.qtdPessoas }}</td>
-        <td>{{ e.lotes[0].nome }}</td>
-        <!-- ngFor in e.lotes -->
+        <td>{{ e.lotes[0]?.nome }}</td>
         <td>
           <button
             type="button"
