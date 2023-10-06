@@ -18,7 +18,6 @@ export class TituloComponent implements OnInit {
   }
 
   listar(): void {
-    console.log('entrou no listar')
     this.router.navigate([`/${this.titulo.toLocaleLowerCase()}/lista`]);
   }
 }

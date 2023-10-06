@@ -48,12 +48,12 @@ export class EventoListaComponent {
     ) { }
 
   public ngOnInit(): void {
-    this.getEventos();
+    this.carregarEventos();
     //timeout 500 of the spinner
     this.spinner.show();
   }
 
-  public getEventos(): void {
+  public carregarEventos(): void {
     this.eventoService.getEventos().subscribe(
      {
       next: (_eventos: Evento[]) => {
@@ -78,6 +78,26 @@ export class EventoListaComponent {
 
   confirm(): void {
     this.modalRef?.hide();
+    this.spinner.show();
+
+    this.eventoService.deleteEvento(this.eventoId).subscribe(
+      {
+        next: (result: any) => {
+          if (result.message === 'Deletado'){
+            this.toastr.success('Deletado com sucesso!', 'Deletado!');
+            this.spinner.hide();
+            this.carregarEventos();
+          }
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.spinner.hide();
+          this.toastr.error(`Erro ao deletar o evento ${this.eventoId}`, 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      }
+    );
+
     this.toastr.success('Deletado com sucesso!', 'Deletado!');
   }
 
@@ -87,4 +107,6 @@ export class EventoListaComponent {
   detalheEvento(id: number): void {
     this.router.navigate([`eventos/detalhe/${id}`]);
   }
+
+
 }

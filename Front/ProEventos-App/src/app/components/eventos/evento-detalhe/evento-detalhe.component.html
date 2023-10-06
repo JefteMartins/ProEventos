@@ -44,6 +44,7 @@
           <input
             class="form-control mb-2 form-control-sm"
             [ngClass]="cssValidator(f.dataEvento)"
+            value="{{evento.dataEvento | DateTimeFormat}}"
             formControlName="dataEvento"
             placeholder=""
             bsDatepicker
@@ -141,7 +142,7 @@
         >
           Cancelar Alteração
         </button>
-        <button class="btn btn-success btn-sm" [disabled]="!form.valid">
+        <button class="btn btn-success btn-sm" [disabled]="!form.valid" (click)="salvarAlteracao()">
           Salvar Evento
         </button>
       </div>

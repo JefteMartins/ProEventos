@@ -108,9 +108,9 @@ namespace ProEventos.API.Controllers
         {
             try
             {
-                return await _eventoService.DeleteEvento(id) ? 
-                       Ok("Deletado") : 
-                       throw new Exception("Ocorreu um problema não específico ao tentar deletar evento.");
+                return await _eventoService.DeleteEvento(id)
+                    ? Ok(new { message = "Deletado" })
+                    : throw new Exception("Ocorreu um problema não específico ao tentar deletar evento.");
             }
             catch (Exception ex)
             {

@@ -11,6 +11,7 @@ import { EventoService } from '@app/services/evento.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -21,6 +22,7 @@ export class EventoDetalheComponent implements OnInit {
   limiteDePessoas = 5000;
   evento = {} as Evento;
   form!: FormGroup;
+  public estadoSalvar = 'post';
 
   get f(): any {
     return this.form.controls;
@@ -33,7 +35,6 @@ export class EventoDetalheComponent implements OnInit {
     private eventoService: EventoService,
     private spinner: NgxSpinnerService,
     private toastr: ToastrService
-
   ) {
     this.localeService.use('pt-br');
   }
@@ -42,23 +43,23 @@ export class EventoDetalheComponent implements OnInit {
     if (eventoIdParam !== null) {
       this.spinner.show();
 
-      this.eventoService.getEventosById(+eventoIdParam).subscribe(
-        {
-          next:(evento: Evento) => {
-            this.evento = { ...evento };
-            this.form.patchValue(this.evento);
-            this.spinner.hide();
-          },
-          error: (error: any) => {
-            this.spinner.hide();
-            this.toastr.error('Erro ao tentar carregar evento.', 'Erro!');
-            console.error(error);
-          },
-          complete: () => {
-            this.spinner.hide();
-          }
-        }
-      )
+      this.estadoSalvar = 'put';
+
+      this.eventoService.getEventosById(+eventoIdParam).subscribe({
+        next: (evento: Evento) => {
+          this.evento = { ...evento };
+          this.form.patchValue(this.evento);
+          this.spinner.hide();
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao tentar carregar evento.', 'Erro!');
+          console.error(error);
+        },
+        complete: () => {
+          this.spinner.hide();
+        },
+      });
     }
   }
 
@@ -100,5 +101,29 @@ export class EventoDetalheComponent implements OnInit {
   }
   public cssValidator(campoForm: FormControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
+  }
+  public salvarAlteracao(): void {
+    this.spinner.show();
+
+    let service = {} as Observable<Evento>;
+
+    if (this.estadoSalvar === 'post') {
+      this.evento = { ...this.form.value };
+      service = this.eventoService.post(this.evento);
+    } else {
+      this.evento = { id: this.evento.id, ...this.form.value };
+      service = this.eventoService.put(this.evento);
+    }
+
+    service.subscribe({
+      next: () => {
+        this.toastr.success('Evento salvo com Sucesso!', 'Sucesso');
+      },
+      error: (e: any) => {
+        console.error(e);
+        this.toastr.error('Erro ao salvar evento', 'Erro');
+      },
+      //complete: () => this.spinner.hide(), como complete so dava hide, posso manter sem ele pois o add ja faz isso
+    }).add(() => this.spinner.hide());
   }
 }
